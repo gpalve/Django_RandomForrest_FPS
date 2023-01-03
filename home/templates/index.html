@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+ <br>
+<h2> Enter following details to know fertility status </h2> <hr> 
+
+<div class="row">
+    <div class="col-md-8"> 
+        <form method="post" action="">
+        {% csrf_token %}
+    
+        <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter your Name(Privacy Protected)?" name="name" required>
+           </div>
+    
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Enter your Email?" name="email" required>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <input type="number" min="12" max="95" class="form-control" placeholder="Age?" name="age" required>
+           </div>
+        
+        <hr> 
+        <div class="form-group">
+        <select name ="season" class="form-control" required>
+            <option value="">Select preferred Season</option>
+            <option value="0">Fall</option>
+            <option value="1">Spring</option>
+            <option value="2">Summer</option>
+            <option value="3">Winter</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select name ="childish_disease" class="form-control" required>
+            <option value="">Any disease in Childhood?</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+          <div class="form-group">
+          <select name ="acc_trauma" class="form-control" required>
+            <option value="">Any accident or Trauma?</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+          <div class="form-group">
+          <select name ="surgical" class="form-control" required>
+            <option value="">Any major surgical history?</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+          
+        <div class="form-group">
+          <select name ="fever_lastyr" class="form-control" required>
+            <option value="">Fever condition?</option>
+            <option value="0">More than 3 months ago</option>
+            <option value="1">Less than 3 months ago</option>
+            <option value="2">No fever</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select name ="alcohol" class="form-control" required>
+            <option value="">Alcohol consumption?</option>
+            <option value="0">Every day</option>
+            <option value="1">Hardly or Never</option>
+            <option value="2">Once a week</option>
+            <option value="3">Several times a day</option>
+            <option value="2">Several times a week</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select name ="smoking" class="form-control" required>
+            <option value="">Smoking?</option>
+            <option value="0">Daily</option>
+            <option value="1">Never</option>
+            <option value="2">Occasional</option>
+          </select>
+        </div>
+        <div class="form-group">
+             <input type="number" min="1" max="20"  class="form-control" placeholder="Daily Sitting hours?" name="sitting" required>
+        </div>
+     
+      <button type="submit"  class="btn btn-success m-2 p-2 btn-block">Submit Details</button> 
+      </form>
+    </div>
+    </div>
+    <div class="col-md-4">
+      <center> 
+        {% if result == 0 %} 
+            
+        <div class="card " style="width: 21rem;">
+            <img class="card-img-top" src="{% static 'abnormal.png' %}" alt="Card image cap">
+            <hr>
+            <div class="card-body">
+              <p class="card-title" style="font-size:17px;color: red;">
+                Hello <b>{{name}}</b><br> your fertility seems to be <b>abnormal</b> 
+              </p>
+              <p class="card-text">It's based on machine learnig prediction system whose accuracy is 99%.Don't rely solely on this system.</p>
+              <a href="#" class="btn btn-primary">Check again</a>
+            </div>
+          </div>
+        {% elif result == 1  %}
+        <div class="card" style="width: 21rem;">
+            <img class="card-img-top" src="{% static 'normal.png' %}" style="width:80%" alt="Card image cap">
+            <hr>
+            <div class="card-body">
+                <p class="card-title" style="font-size:17px;color: green;">
+                Hello <b>{{name}}</b> <br> your fertility seems to be <b>normal</b> 
+              </p>
+              <p class="card-text">It's based on machine learnig prediction system whose accuracy is 99%.Don't rely solely on this system.</p>
+              <a href="#" class="btn btn-primary">Check again</a>
+            </div>
+          </div>
+    
+          {% else  %}
+    
+          <div class="card" style="width: 21rem;">
+            <img class="card-img-top" src="{% static 'bg.jpg' %}" alt="Card image cap">
+            <hr>
+            <div class="card-body">
+              <h5 class="card-title">
+               Welcome to FPS
+                </h5>
+              <p class="card-text">Fertility prediciton system is based on machine learnig prediction system whose accuracy is 99%.Don't rely solely on this system.</p>
+              <a href="#" class="btn btn-primary">Check again</a>
+            </div>
+          </div>
+         {% endif %}
+       </div>
+    </center> 
+</div>
+
+
+{% endblock %}
