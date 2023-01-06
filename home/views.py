@@ -7,19 +7,17 @@ import pymysql as pm
 from sqlalchemy import create_engine
 from django.templatetags.static import static
 import pickle
-
-
+from urllib.parse import quote  
 
 model = load('model/fm.pkl')
-
 
 # Create your views here.
 def index(request):
     context = {'result':''}
     data = {'name':[],'email':[],'age':[],'season':[],'childish_disease':[],'acc_trauma':[],'surgical':[],'surgical':[],'fever_lastyr':[],'alcohol':[],'smoking':[],'sitting':[]}
     df = pd.DataFrame(data)
-    conn = create_engine("mysql+pymysql://root:@localhost/fps")
-   
+    # conn = create_engine("mysql+pymysql://root:'Malhar@26'@localhost/fps")
+    conn = create_engine('mysql+pymysql://root:%s@localhost:3306/fps' % quote('Malhar@26'))
     
     if request.method == 'POST':
         name = request.POST.get('name')
