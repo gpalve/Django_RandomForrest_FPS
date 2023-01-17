@@ -1,4 +1,4 @@
-# Django_RandomForrest_FPS
+# Django_RandomForrest Fertility Prediction System
 This is the main django project which is having utilization of joblib file
 
 How to run this project ? <br>
